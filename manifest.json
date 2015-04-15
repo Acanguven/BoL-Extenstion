@@ -1,26 +1,27 @@
 {
-  "name": "Bot of Legends Helper",
-  "version": "0.1",
-  "description": "Bot of Legends Helper Plugin",
-  "permissions": [
-		"downloads","declarativeContent"
-   ],
-   "content_scripts": [
-    {
-	  "matches": [
-		"http://forum.botoflegends.com/*",
-		"https://forum.botoflegends.com/*"
-	  ],
-	  "js": [
-		"front.js"
-	  ],
-	  "run_at": "document_end",
-	  "all_frames": false
+	"name": "Bot of Legends Helper",
+	"version": "0.1",
+	"description": "Bot of Legends Helper Plugin",
+	"permissions": [
+		"downloads",
+		"declarativeContent"
+	],
+	"content_scripts": [{
+		"matches": [
+			"http://forum.botoflegends.com/*",
+			"https://forum.botoflegends.com/*"
+		],
+		"js": [
+			"front.js"
+		],
+		"run_at": "document_end",
+		"all_frames": false
 	}],
 	"background" : {
 		"scripts": ["background.js"],
 		"persistent": false
-	  },
-   "manifest_version": 2
+  	},
+	"offline_enabled": false,
+	"manifest_version": 2
 }
 
