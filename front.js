@@ -44,11 +44,10 @@ for(var x = 0; x < array.length; x++){
 	});
 }
 
-
 for(var x = 0; x < document.getElementsByClassName("prettyprint").length; x++){
 	document.getElementsByClassName("prettyprint")[x].innerHTML = "<button>Download this code with Bot Of Legends Helper</button></br>" + document.getElementsByClassName("prettyprint")[x].innerHTML;
 	document.getElementsByClassName("prettyprint")[x].firstChild.addEventListener("click",function(event){
-		var lua = this.parentNode.innerHTML.split("</button>")[1].replace(/<[^>]*>/g, "");
+		var lua = this.parentNode.innerHTML.split("</button>")[1].replace(/<[^>]*>/g, "").replace("&nbsp;","").replace(/&lt;/g,'<').replace(/&gt;/g,'>');
 		createLua(lua);
 	});
 }
