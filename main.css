@@ -5,12 +5,15 @@
 	text-align:center;
 	border-radius:10px 10px 10px 10px;
 	height:40px;
-	
+	cursor:default;
 }
 .dlhelper span{
 	color:blue;
+	cursor:pointer;
+}
+.dlhelper span:last-child{
+	color:green !important;
 }
 .dlhelper:hover{
-	box-shadow: 0px 0px 2px 0px brown;
-	cursor:pointer;
+	box-shadow: 0px 0px 2px 0px brown;	
 }
