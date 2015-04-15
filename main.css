@@ -1,0 +1,16 @@
+.dlhelper{
+	background-color:beige;
+	color:brown;
+	font-size:25px;
+	text-align:center;
+	border-radius:10px 10px 10px 10px;
+	height:40px;
+	
+}
+.dlhelper span{
+	color:blue;
+}
+.dlhelper:hover{
+	box-shadow: 0px 0px 2px 0px brown;
+	cursor:pointer;
+}
