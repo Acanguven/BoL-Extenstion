@@ -24,7 +24,7 @@ var links = document.getElementsByTagName("a");
 for(var i=0; i<links.length; i++) {
 	for(var x = 0; x < testCases.length; x++){
 		if(links[i].href.match(testCases[x].test)){
-			links[i].insertAdjacentHTML('beforebegin','<div class="dlhelper" dltype="'+testCases[x].name+'" dllink="'+links[i].href+'"><img src="https://raw.githubusercontent.com/thelaw44/BoL-Extenstion/master/arrow_animate.gif">&nbsp;&nbsp;&nbsp;Bot of Legends Helper: <span>Download Script('+decodeURI(links[i].href.replace(/^.*[\\\/]/, ''))+')</span> Or <span>Open Link ('+decodeURI(links[i].href.replace(/^.*[\\\/]/, ''))+')</span></div>');
+			links[i].insertAdjacentHTML('beforebegin','<div class="dlhelper" dltype="'+testCases[x].name+'" dllink="'+links[i].href+'"><img src="https://raw.githubusercontent.com/thelaw44/BoL-Extenstion/master/arrow_animate.gif">&nbsp;&nbsp;&nbsp;BoL Helper: <span>Download Script('+decodeURI(links[i].href.replace(/^.*[\\\/]/, ''))+')</span> Or <span>Open Link</span></div>');
 			links[i].style.display = 'none';
 			array.push(links[i]);
 		}
