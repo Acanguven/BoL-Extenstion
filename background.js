@@ -1,3 +1,8 @@
+if (localStorage.getItem("bolhelper") === null) {
+  localStorage.setItem("bolhelper",JSON.stringify({github:true,pastebin:true,openlink:true,codebox:true}))
+}
+
+var settings = JSON.parse(localStorage.getItem("bolhelper"));
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	if (message.action == "download") {
 		try{
@@ -38,4 +43,16 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 			filename: "newLua.lua"
 		});
 	};
+	if(message.action == "settings") {
+		sendResponse({settings:settings});
+	}
 });
+
+function popupNewTab(link){
+	chrome.tabs.create({ url: link });
+}
+
+function updateSettings(option){
+	settings[option] = !settings[option];
+	localStorage.setItem("bolhelper",JSON.stringify(settings))
+} 
