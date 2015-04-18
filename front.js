@@ -23,6 +23,14 @@ function buildPage(){
 		{
 			name:"gitHubRaw",
 			test:/githubusercontent\.com\/(.*)\.lua/
+		},
+		{
+			name:"privatePasteLink",
+			test:/privatepaste.com\/((?!download).*)/
+		},
+		{
+			name:"privatePasteRaw",
+			test:/privatepaste.com\/download\/(.*)/
 		}
 	];
 
@@ -42,7 +50,25 @@ function buildPage(){
 					continue;
 				}
 			}
+			if(testCases[x].name == "privatePasteLink" || testCases[x].name == "privatePasteRaw"){
+				if(!settings.privatepaste){
+					continue;
+				}
+			}
 			if(links[i].href.match(testCases[x].test)){
+				if(!settings.signatureLinks){
+					var a = links[i];
+					var disableLink = false;
+					while (a) {
+					    if(typeof a.className != "undefined" && a.className.indexOf("signature")>=0){
+					        disableLink = true
+					    }
+					    a = a.parentNode;
+					}
+					if (disableLink) {
+						continue;
+					};
+				}
 				var opener = settings.openlink ? ' Or <span>Open Link</span>' : '';
 				links[i].insertAdjacentHTML('beforebegin','<div class="dlhelper" dltype="'+testCases[x].name+'" dllink="'+links[i].href+'"><img src="https://raw.githubusercontent.com/thelaw44/BoL-Extenstion/master/arrow_animate.gif">&nbsp;&nbsp;&nbsp;BoL Helper: <span>Download Script('+decodeURI(links[i].href.replace(/^.*[\\\/]/, ''))+')</span>'+opener+'</div>');
 				links[i].style.display = 'none';
@@ -64,6 +90,14 @@ function buildPage(){
 		  		win.focus();
 			});
 		}
+		var changeButton = document.createElement("img")
+		changeButton.src = chrome.extension.getURL("ISync_icon.png");
+		changeButton.className = "changeButton"
+		changeButton.addEventListener("click", function(event){
+			this.parentNode.style.display = "none";
+			this.parentNode.nextSibling.style.display = "block"
+		});
+		h3Obj.appendChild(changeButton);
 	}
 
 	if(settings.codebox){

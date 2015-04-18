@@ -1,5 +1,5 @@
 if (localStorage.getItem("bolhelper") === null) {
-  localStorage.setItem("bolhelper",JSON.stringify({github:true,pastebin:true,openlink:true,codebox:true}))
+  localStorage.setItem("bolhelper",JSON.stringify({github:true,pastebin:true,openlink:true,codebox:true,privatepaste:true,signatureLinks:false}))
 }
 
 var settings = JSON.parse(localStorage.getItem("bolhelper"));
@@ -31,6 +31,19 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 				chrome.downloads.download({
 				  url: urlLink,
 				  filename: urlLink.split("i=")[1]+".lua"
+				});
+			};
+			if (message.type == "privatePasteRaw") {
+				chrome.downloads.download({
+				  url: message.url,
+				  filename: message.url.split("http://privatepaste.com/download/")[1]+".lua"
+				});
+			};
+			if (message.type == "privatePasteLink") {
+				var urlLink = "http://privatepaste.com/download/" + message.url.split("privatepaste.com/")[1];
+				chrome.downloads.download({
+				  url: urlLink,
+				  filename: urlLink.split("privatepaste.com/download/")[1]+".lua"
 				});
 			};
 		}catch(err){alert("Bot of Legends Helper Error:" + error)}

@@ -17,19 +17,30 @@ app.controller("info",function($scope,$http){
   	});
 })
 
+var champList = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ashe","Azir","Bard","Blitzcrank","Brand","Braum","Caitlyn","Cassiopeia","Cho'gath","Corki","Darius","Diana","Dr. Mundo","Draven","Elise","Evelynn","Ezreal","Fiddlesticks","Fiora","Fizz","Galio","Gangplank","Garen","Gnar","Gragas","Graves","Hecarim","Heimerdinger","Irelia","Janna","Jarvan IV","Jax","Jayce","Jinx","Kalista","Karma","Karthus","Kassadin","Katarina","Kayle","Kennen","Kha'Zix","Kog'Maw","LeBlanc","Lee Sin","Leona","Lissandra","Lucian","Lulu","Lux","Malphite","Malzahar","Maokai","Master Yi","Miss Fortune","Mordekaiser","Morgana","Nami","Nasus","Nautilus","Nidalee","Nocturne","Nunu","Olaf","Orianna","Pantheon","Poppy","Quinn","Rammus","Rek'Sai","Renekton","Rengar","Riven","Rumble","Ryze","Sejuani","Shaco","Shen","Shyvana","Singed","Sion","Sivir","Skarner","Sona","Soraka","Swain","Syndra","Talon","Taric","Teemo","Thresh","Tristana","Trundle","Tryndamere","Twisted Fate","Twitch","Udyr","Urgot","Varus","Vayne","Veigar","Vel'Koz","Vi","Viktor","Vladimir","Volibear","Warwick","Wukong","Xerath","Xin Zhao","Yasuo","Yorick","Zac","Zed","Ziggs","Zilean","Zyra"];
+
+
 app.controller("fastss", function($scope,$http){
 	$scope.champName = "";
 	$scope.scriptList = [];
+	$scope.suggestion = "";
 	$scope.$watch('champName', function(){
 		$scope.scriptList = [];
-		$http.get('http://www.scriptstatus.net/get-'+$scope.champName).
+		$scope.suggestion = $scope.champName;
+		for(var z = 0; z < champList.length;z++){
+			if(champList[z].toLowerCase().indexOf($scope.champName.toLowerCase()) >= 0){
+				$scope.suggestion = champList[z];
+				break;
+			}
+		}
+		$http.get('http://www.scriptstatus.net/get-'+$scope.suggestion).
 	  	success(function(data, status, headers, config) {
+	  		$scope.scriptList = [];
 			if(data.indexOf("<tbody>")>0){
 				var regex = /<tr id="tr-(.*?)"><td>(.*?)<\/td><td class="(.*?)">(.*?)<\/td><td class="name (.*?)">(.*?)<\/td><td>(.*?)<\/td><td>(.*?)<td>*/gi; 
 				do {
 				    m = regex.exec(data);
 				    if (m) {
-				    	console.log(m)
 				    	var script = {
 				        	type: m[4],
 				        	name: m[6].substring(0, 40),
@@ -62,7 +73,9 @@ app.controller("settings",function($scope){
 		github:background.settings.github,
 		pastebin:background.settings.pastebin,
 		openlink:background.settings.openlink,
-		codebox:background.settings.codebox
+		codebox:background.settings.codebox,
+		privatepaste:background.settings.privatepaste,
+		signatureLinks:background.settings.signatureLinks
 	}
 	$scope.set = function(option){
 		$scope.settings[option] = !$scope.settings[option];

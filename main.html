@@ -10,6 +10,9 @@
 		::-webkit-scrollbar { 
 		    display: none; 
 		}
+		html{
+			height:99%;
+		}
 		hr{
 			margin:5px 0px !important;
 		}
@@ -18,7 +21,14 @@
 		}
 		*{
 			transition-duration:0.5s !important;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
 		}
+
 		</style>
 	</head>
 
@@ -43,8 +53,16 @@
 
 		<div ng-controller="fastss">
 			<hr>
+			<center>
+				<a href="http://www.scriptstatus.net" target="_blank">
+					<img src="http://www.scriptstatus.net/res/logo.png" style="max-width: 50%;">
+				</a>
+			</center>
 			<div class="input-control text">
 			    <input type="text" placeholder="Search Champion Script" ng-model="champName"/>
+			</div>
+			<div style="font-size: 13px;text-align: center;cursor: default;" ng-if="champName.length>0">
+				Showing script list for <b>{{suggestion}}</b>
 			</div>
 			<table class="table" ng-if="champName.length>0">
                 <thead>
@@ -61,9 +79,6 @@
                 		<td>{{script.author}}</td>
                 		<td>{{script.type}}</td>
                 	</tr>
-                    <tr>
-                    	<td colspan="3" style="text-align:center;">Powered By Script Status</span>
-                    </tr>
 				</tbody>
 			</table>
         </div>
@@ -104,6 +119,17 @@
 	                    <span class="check"></span>
 	            	</div>
 	            </div>
+	            <div class="input-control switch margin10" data-role="input-control" style="width:93%;" ng-click="set('privatepaste')">
+	                <div style="float:left;">
+		                <label>
+		                    Edit Privatepaste Links
+		                </label>
+	                </div>
+	                <div style="float:right;position: relative;top: 5px;">
+		                <input type="checkbox" ng-checked="settings.privatepaste"/>
+	                    <span class="check"></span>
+	            	</div>
+	            </div>
 	            <div class="input-control switch margin10" data-role="input-control" style="width:93%;" ng-click="set('codebox')">
 	                <div style="float:left;">
 		                <label>
@@ -115,13 +141,27 @@
 	                    <span class="check"></span>
 	            	</div>
 	            </div>
+	            <div class="input-control switch margin10" data-role="input-control" style="width:93%;" ng-click="set('signatureLinks')">
+	                <div style="float:left;">
+		                <label>
+		                    Edit User Signature Links
+		                </label>
+	                </div>
+	                <div style="float:right;position: relative;top: 5px;">
+		                <input type="checkbox" ng-checked="settings.signatureLinks"/>
+	                    <span class="check"></span>
+	            	</div>
+	            </div>
 			</div>
 			<hr>
 			<div id='mod'>
 			
 			</div>
 		</div>
-		<center><a href="http://forum.botoflegends.com/topic/59187-utility-bol-chrome-extension/" target="_blank">Feedback Please</a><br><a href="http://forum.botoflegends.com/user/127916-the-law/" target="_blank" style="font-weight: bold;color:#5F9F9F;">The Law</a></center>
+		<div style="padding: 10px;padding-top: 3px;height:40px;">
+			<a href="http://forum.botoflegends.com/user/127916-the-law/" target="_blank" style="font-weight: bold;color:#5F9F9F;float:left;">The Law</a>
+			<a href="http://forum.botoflegends.com/topic/59187-utility-bol-chrome-extension/" target="_blank" style="float:right;">Feedback Please</a>
+		</div>
 	</body>
 
 </html>
