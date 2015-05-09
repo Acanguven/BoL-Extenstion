@@ -18,6 +18,12 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 				  filename: message.url.split("i=")[1]+".lua"
 				});
 			};
+			if (message.type == "luaRaw") {
+				chrome.downloads.download({
+				  url: message.url,
+				  filename: message.url.split("/").pop()
+				});
+			};
 			if (message.type == "gitHubLink") {
 				var urlLink = "https://raw.githubusercontent.com/" + message.url.replace("/blob", "").split("github.com/")[1];
 				chrome.downloads.download({

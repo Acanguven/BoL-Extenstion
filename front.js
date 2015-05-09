@@ -31,6 +31,10 @@ function buildPage(){
 		{
 			name:"privatePasteRaw",
 			test:/privatepaste.com\/download\/(.*)/
+		},
+		{
+			name:"luaRaw",
+			test:/^(.*).lua$/
 		}
 	];
 
@@ -73,7 +77,9 @@ function buildPage(){
 				links[i].insertAdjacentHTML('beforebegin','<div class="dlhelper" dltype="'+testCases[x].name+'" dllink="'+links[i].href+'"><img src="https://raw.githubusercontent.com/thelaw44/BoL-Extenstion/master/arrow_animate.gif">&nbsp;&nbsp;&nbsp;BoL Helper: <span>Download Script('+decodeURI(links[i].href.replace(/^.*[\\\/]/, ''))+')</span>'+opener+'</div>');
 				links[i].style.display = 'none';
 				array.push(links[i]);
+				i++;
 			}
+			
 		}	
 	}
 
