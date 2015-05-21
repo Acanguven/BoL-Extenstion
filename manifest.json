@@ -1,6 +1,6 @@
 {
 	"name": "Bot of Legends Helper",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Bot of Legends Helper Plugin",
 	"permissions": [
 		"downloads",
@@ -19,7 +19,10 @@
 			"https://forum.botoflegends.com/*"
 		],
 		"js": [
-			"front.js"
+			"jquery.min.js",
+			"angular.min.js",
+			"front.js",
+			"ticket.js"
 		],
 		"css":[
 			"main.css"
